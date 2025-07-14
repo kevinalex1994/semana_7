@@ -1,14 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista de Productos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #btn-agregar {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #btn-agregar:hover {
+      background-color: #218838;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Productos disponibles</h1>
-  <ul id="lista-productos"></ul>
 
-  <button id="agregar-producto">Agregar producto</button>
+  <h1>Lista de Productos</h1>
+
+  <form id="form-producto">
+    <input type="text" id="nombre" placeholder="Nombre del producto" required>
+    <input type="number" id="precio" placeholder="Precio" required>
+    <input type="text" id="descripcion" placeholder="Descripción" required>
+    <button type="submit" id="btn-agregar">Agregar Producto</button>
+  </form>
+
+  <div id="mensaje-error" class="error"></div>
+
+  <table id="tabla-productos">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aquí van los productos -->
+    </tbody>
+  </table>
 
   <script src="script.js"></script>
 </body>
