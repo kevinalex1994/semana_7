@@ -1,32 +1,52 @@
-// Arreglo inicial de productos
 let productos = [
-  { nombre: "Fertilizante Orgánico", precio: 12.5, descripcion: "Mejora la calidad del suelo." },
-  { nombre: "Semillas de Maíz", precio: 8.0, descripcion: "Alta resistencia a plagas." },
-  { nombre: "Herramienta de Riego", precio: 25.0, descripcion: "Ideal para cultivos medianos." }
+  { nombre: "Camiseta", precio: 15.99, descripcion: "Camiseta de algodón 100%" },
+  { nombre: "Pantalón", precio: 29.99, descripcion: "Pantalón de mezclilla azul" },
+  { nombre: "Zapatos", precio: 49.99, descripcion: "Zapatos deportivos unisex" }
 ];
 
-// Función para renderizar productos
+const cuerpoTabla = document.querySelector("#tabla-productos tbody");
+const form = document.getElementById("form-producto");
+const mensajeError = document.getElementById("mensaje-error");
+
+// Función para mostrar productos
 function renderizarProductos() {
-  const lista = document.getElementById("lista-productos");
-  lista.innerHTML = ""; // Limpiar contenido previo
+  cuerpoTabla.innerHTML = "";
 
   productos.forEach(producto => {
-    const item = document.createElement("li");
-    item.textContent = `${producto.nombre} - $${producto.precio} | ${producto.descripcion}`;
-    lista.appendChild(item);
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${producto.nombre}</td>
+      <td>$${producto.precio.toFixed(2)}</td>
+      <td>${producto.descripcion}</td>
+    `;
+    cuerpoTabla.appendChild(fila);
   });
 }
 
-// Evento para agregar un nuevo producto
-document.getElementById("agregar-producto").addEventListener("click", () => {
-  const nuevoProducto = {
-    nombre: "Nuevo Insumo",
-    precio: 10.0,
-    descripcion: "Descripción genérica del producto."
-  };
-  productos.push(nuevoProducto);
+// Evento al enviar el formulario
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const precio = parseFloat(document.getElementById("precio").value);
+  const descripcion = document.getElementById("descripcion").value.trim();
+
+  if (!nombre || isNaN(precio) || !descripcion) {
+    mensajeError.textContent = "Por favor, completa todos los campos correctamente.";
+    return;
+  }
+
+  mensajeError.textContent = "";
+
+  productos.push({ nombre, precio, descripcion });
+
   renderizarProductos();
+
+  // Limpiar formulario
+  form.reset();
+  document.getElementById("nombre").focus();
 });
 
-// Renderizar al cargar la página
+// Al iniciar
 window.onload = renderizarProductos;
+
